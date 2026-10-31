@@ -123,6 +123,8 @@ details.topics summary::-webkit-details-marker{display:none}
 .toast.show{opacity:1}
 .hint{font-size:14px;color:var(--soft);text-align:center;margin-top:12px}
 .foot{text-align:center;margin-top:24px}
+.qr{display:flex;justify-content:center;margin:4px 0 6px}
+.qr img{width:200px;height:200px;padding:10px;background:#fff;border:1px solid var(--line);border-radius:14px}
 .btn.end{color:#b00020;border-color:#e8c4c9}
 code{background:var(--chip);padding:1px 6px;border-radius:4px}
 </style>
@@ -133,6 +135,7 @@ code{background:var(--chip);padding:1px 6px;border-radius:4px}
 
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 /* ===========================================================
    ① Firebase 설정값 — Firebase 콘솔에서 복사한 값으로 바꿔 넣으세요
@@ -248,20 +251,22 @@ async function createRoom(){
   }
   await db.ref('rooms/'+code).set({
     host: myId, phase: 'lobby', round: 0, createdAt: Date.now(),
+    joinToken: Math.random().toString(36).slice(2,10),
     players: { [myId]: { name, joinedAt: Date.now(), score: 0 } }
   });
   enterRoom(code);
 }
 
-async function joinRoom(codeArg){
+async function joinRoom(codeArg, token){
   const name = (document.getElementById('nameIn')?.value || myName || '').trim();
   const code = (codeArg || document.getElementById('codeIn').value || '').trim();
   if(!name) return toast('닉네임을 먼저 적어 주세요');
   if(!/^\d{4}$/.test(code)) return toast('입장 코드 4자리를 적어 주세요');
   myName = name; store('lh_name', name);
   const s = await db.ref('rooms/'+code).get();
-  if(!s.exists()) return toast('그런 방이 없어요. 코드를 다시 확인해 주세요');
+  if(!s.exists()) return toast(token ? '이미 끝난 게임의 QR이에요. 호스트에게 새 QR을 받아 주세요' : '그런 방이 없어요. 코드를 다시 확인해 주세요');
   const r = s.val(); const ps = r.players || {};
+  if(token && r.joinToken !== token) return toast('이미 끝난 게임의 QR이에요. 호스트에게 새 QR을 받아 주세요');
   if(ps[myId]){ await db.ref(`rooms/${code}/players/${myId}/name`).set(name); return enterRoom(code); }
   if(!['lobby','result'].includes(r.phase)) return toast('게임이 진행 중이에요. 이번 판이 끝나면 들어와 주세요');
   if(Object.keys(ps).length >= MAX_PLAYERS) return toast(`방이 가득 찼어요 (최대 ${MAX_PLAYERS}명)`);
@@ -395,7 +400,18 @@ function viewSetup(){
 }
 
 function viewHome(){
-  const urlCode = new URLSearchParams(location.search).get('room') || '';
+  const q = new URLSearchParams(location.search);
+  const urlCode = q.get('room') || '';
+  if(urlCode && q.get('t')) return brand() + `
+  <section class="card">
+    <div class="eyebrow">INVITATION</div>
+    <h2 style="margin-top:6px">게임에 초대받았어요</h2>
+    <p class="muted center">닉네임만 적으면 바로 참가해요.</p>
+    <label for="nameIn">닉네임</label>
+    <input id="nameIn" type="text" maxlength="10" placeholder="예) 셜록" value="${esc(myName)}">
+    <button class="btn" data-act="joinInvite">참가하기</button>
+  </section>
+  <div class="foot"><button class="btn ghost small" data-act="home">처음 화면으로</button></div>`;
   return brand() + `
   <section class="card">
     <label for="nameIn">닉네임</label>
@@ -452,13 +468,31 @@ function playerList(opts = {}){
   }).join('') + `</ul>`;
 }
 
+function inviteUrl(){
+  return location.origin + location.pathname + '?room=' + roomCode + (room && room.joinToken ? '&t=' + room.joinToken : '');
+}
+let qrCache = {};
+function qrBlock(){
+  const url = inviteUrl();
+  if(!qrCache[url] && window.QRCode){
+    try{
+      const tmp = document.createElement('div');
+      new QRCode(tmp, { text: url, width: 360, height: 360, colorDark: '#111111', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M });
+      const c = tmp.querySelector('canvas');
+      qrCache[url] = c ? c.toDataURL() : (tmp.querySelector('img') || {}).src;
+    }catch(e){}
+  }
+  return qrCache[url] ? `<div class="qr"><img src="${qrCache[url]}" alt="참가용 QR 코드"></div>` : '';
+}
+
 function viewLobby(){
   const n = Object.keys(players()).length;
   const canStart = n >= MIN_PLAYERS && n <= MAX_PLAYERS;
   let html = `
   <section class="card"><h2>입장 코드</h2>
+    ${isHost() ? qrBlock() : ''}
     <div class="bigcode">${esc(roomCode)}</div>
-    <p class="muted center">같은 주소로 들어와 이 코드를 입력하면 입장할 수 있어요.</p>
+    <p class="muted center">${isHost() ? 'QR을 찍으면 닉네임만 적고 바로 들어와요.<br>' : ''}같은 주소로 들어와 이 코드를 입력해도 돼요.</p>
     <button class="btn ghost small" style="display:block;margin:8px auto 0" data-act="copy">초대 링크 복사</button>
   </section>
   <section class="card"><h2>참가자 (${n}/${MAX_PLAYERS})</h2>${playerList()}</section>`;
@@ -570,6 +604,8 @@ async function act(a, id){
     switch(a){
       case 'create': return await createRoom();
       case 'join': return await joinRoom();
+      case 'joinInvite': { const q = new URLSearchParams(location.search); return await joinRoom(q.get('room'), q.get('t')); }
+      case 'home': history.replaceState(null, '', location.pathname); return render();
       case 'start': return await startGame();
       case 'submit': return await submitNumber();
       case 'force': return await forceDiscuss();
@@ -583,7 +619,7 @@ async function act(a, id){
         if(confirm(`${nameOf(id)} 님을 내보낼까요?`)) await db.ref(`rooms/${roomCode}/players/${id}`).remove();
         return;
       case 'copy': {
-        const url = location.origin + location.pathname + '?room=' + roomCode;
+        const url = inviteUrl();
         try{ await navigator.clipboard.writeText(url); toast('초대 링크를 복사했어요'); }
         catch(e){ prompt('이 링크를 복사해 보내세요', url); }
         return;
