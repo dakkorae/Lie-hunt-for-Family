@@ -3,142 +3,131 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#5a141e">
-<title>거짓말 극장</title>
+<meta name="theme-color" content="#f4f4f3">
+<title>라이어 게임 for Family</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Song+Myung&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   color-scheme: light;
-  --paper:#f4ead5; --paper-2:#ebdcbc; --paper-3:#fffaf0;
-  --ink:#2b1d14; --ink-soft:#6a5440; --line:#cdb284;
-  --wine:#7a1f2b; --wine-dark:#4e1119; --gold:#a8834a; --gold-light:#e2c88f;
-  --liar:#8a2232; --troll:#3e5c3a; --aud:#2f4a6b;
+  --bg:#f4f4f3; --card:#ffffff; --ink:#111111; --ink-2:#3a3a3a; --soft:#8a8a8a;
+  --line:#e6e6e4; --line-2:#d4d4d2; --chip:#f1f1f0; --mid:#5c5c5c;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
-html{background:#f4ead5}
-body,h1,h2,h3,p,div{word-break:keep-all;overflow-wrap:break-word}
+html{background:#f4f4f3}
+body,h1,h2,h3,p,div,li{word-break:keep-all;overflow-wrap:break-word}
 body{
-  min-height:100vh; color:var(--ink); background:var(--paper);
-  background-image:
-    radial-gradient(ellipse at 50% 0%, rgba(255,250,235,.9), transparent 60%),
-    radial-gradient(ellipse at 50% 120%, rgba(120,80,40,.25), transparent 60%),
-    repeating-linear-gradient(0deg, rgba(120,90,50,.025) 0 2px, transparent 2px 4px);
-  font-family:'Gowun Batang', 'Nanum Myeongjo', serif; font-size:16px; line-height:1.6;
-  -webkit-tap-highlight-color: transparent;
+  min-height:100vh;color:var(--ink);background:var(--bg);
+  font-family:'Nanum Gothic','Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;
 }
-/* 커튼 띠 */
-.curtain{
-  height:34px; background:
-    radial-gradient(circle at 12px -4px, transparent 13px, var(--wine) 14px) 0 0/24px 34px repeat-x;
-  filter: drop-shadow(0 3px 2px rgba(60,10,15,.35));
-}
-.curtain-top{height:14px;background:linear-gradient(var(--wine-dark),var(--wine));border-bottom:2px solid var(--gold)}
-.wrap{max-width:480px;margin:0 auto;padding:8px 16px 48px}
-h1,h2,h3,.display{font-family:'Song Myung','Gowun Batang',serif;font-weight:400;margin:0}
-.brand{text-align:center;margin:18px 0 22px}
-.brand h1{font-size:44px;letter-spacing:.08em;color:var(--wine-dark);text-shadow:0 1px 0 #fff8e6}
-.brand .sub{font-style:italic;color:var(--ink-soft);letter-spacing:.3em;font-size:13px;margin-top:2px}
-.orn{color:var(--gold);text-align:center;letter-spacing:.6em;font-size:14px;margin:6px 0}
-.topbar{display:flex;align-items:center;justify-content:space-between;margin:14px 0 12px;font-size:14px;color:var(--ink-soft)}
-.topbar .name{font-family:'Song Myung',serif;font-size:20px;color:var(--wine-dark)}
-.badge{border:1px solid var(--gold);padding:2px 10px;border-radius:2px;background:var(--paper-3);letter-spacing:.15em}
+.wrap{max-width:480px;margin:0 auto;padding:12px 16px 56px}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.02em}
+.brand{text-align:center;margin:44px 0 30px}
+.brand h1{font-size:38px;line-height:1.15}
+.brand h1 .for{display:block;font-size:15px;font-weight:700;letter-spacing:.32em;color:var(--soft);margin-top:10px;text-transform:uppercase}
+.brand .sub{font-size:11px;letter-spacing:.42em;color:var(--soft);margin-top:14px}
+.brand .bar{width:28px;height:2px;background:var(--ink);margin:18px auto 0}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin:14px 2px 6px;font-size:13px;color:var(--soft)}
+.topbar .name{font-size:15px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.topbar .name small{font-weight:700;color:var(--soft);margin-left:4px;letter-spacing:.1em}
+.badge{background:var(--ink);color:#fff;padding:3px 10px;border-radius:999px;letter-spacing:.18em;font-weight:700}
 
-.card{
-  position:relative;background:linear-gradient(var(--paper-3),#f8efdb);
-  border:1px solid var(--gold); outline:3px double var(--line); outline-offset:3px;
-  padding:20px 18px;margin:18px 4px;box-shadow:0 6px 18px rgba(80,50,20,.15);
-}
-.card::before,.card::after{content:'✦';position:absolute;color:var(--gold);font-size:12px;line-height:1}
-.card::before{top:4px;left:6px}.card::after{bottom:4px;right:6px}
-.card h2{font-size:22px;color:var(--wine-dark);text-align:center;margin-bottom:10px}
-.card h3{font-size:18px;color:var(--wine-dark);margin-bottom:6px}
-.muted{color:var(--ink-soft);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 20px;margin:14px 0;
+  box-shadow:0 1px 2px rgba(0,0,0,.03),0 8px 24px rgba(0,0,0,.04)}
+.card h2{font-size:20px;text-align:center;margin-bottom:12px}
+.card h3{font-size:17px;margin-bottom:6px}
+.muted{color:var(--soft);font-size:14px}
 .center{text-align:center}
-.rule{border:0;border-top:1px solid var(--line);margin:18px 0;position:relative;overflow:visible}
-.rule::after{content:'❦';position:absolute;left:50%;top:-12px;transform:translateX(-50%);background:var(--paper-3);padding:0 8px;color:var(--gold)}
+.rule{border:0;border-top:1px solid var(--line);margin:24px 0}
 
-label{display:block;font-size:14px;color:var(--ink-soft);margin:10px 0 4px}
+label{display:block;font-size:13px;font-weight:700;color:var(--mid);margin:12px 0 6px}
 input[type=text],input[type=number],input[type=tel]{
-  width:100%;font:inherit;font-size:18px;padding:11px 12px;color:var(--ink);
-  background:#fffdf7;border:1px solid var(--line);border-bottom:2px solid var(--gold);border-radius:2px;outline:none;
+  width:100%;font:inherit;font-size:17px;padding:13px 14px;color:var(--ink);
+  background:#fafafa;border:1px solid var(--line-2);border-radius:12px;outline:none;transition:border-color .15s,box-shadow .15s;
 }
-input:focus{border-color:var(--wine);box-shadow:0 0 0 3px rgba(122,31,43,.12)}
-input.code{text-align:center;letter-spacing:.5em;font-size:26px;font-family:'Song Myung',serif}
+input:focus{border-color:var(--ink);background:#fff;box-shadow:0 0 0 3px rgba(0,0,0,.06)}
+input.code{text-align:center;letter-spacing:.5em;font-size:26px;font-weight:800;padding-left:.5em}
 
-.btn{
-  display:block;width:100%;font:inherit;font-size:18px;letter-spacing:.12em;cursor:pointer;
-  padding:13px 14px;margin-top:12px;border-radius:2px;
-  color:#fbf2dc;background:linear-gradient(var(--wine),var(--wine-dark));
-  border:1px solid var(--gold);box-shadow:inset 0 0 0 2px rgba(226,200,143,.35),0 3px 8px rgba(60,10,15,.25);
-}
-.btn:active{transform:translateY(1px)}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-.btn.ghost{color:var(--wine-dark);background:transparent;box-shadow:none;border:1px solid var(--gold)}
-.btn.small{font-size:14px;padding:8px 10px;width:auto;display:inline-block;margin:0}
+.btn{display:block;width:100%;font:inherit;font-size:16px;font-weight:800;letter-spacing:.02em;cursor:pointer;
+  padding:15px 14px;margin-top:12px;border-radius:12px;color:#fff;background:var(--ink);border:1px solid var(--ink);transition:opacity .15s}
+.btn:active{opacity:.8}
+.btn:disabled{opacity:.3;cursor:not-allowed}
+.btn.ghost{color:var(--ink);background:#fff;border:1px solid var(--line-2)}
+.btn.small{font-size:13px;padding:9px 14px;width:auto;display:inline-block;margin:0;border-radius:999px}
 .row{display:flex;gap:10px}.row>*{flex:1}
 
-.plist{list-style:none;padding:0;margin:8px 0 0}
-.plist li{display:flex;align-items:center;justify-content:space-between;padding:9px 4px;border-bottom:1px dotted var(--line)}
+.plist{list-style:none;padding:0;margin:4px 0 0}
+.plist li{display:flex;align-items:center;justify-content:space-between;padding:11px 2px;border-bottom:1px solid var(--line)}
 .plist li:last-child{border-bottom:0}
-.plist .who{font-size:17px}
-.plist .x{background:none;border:0;color:var(--ink-soft);font-size:18px;cursor:pointer;padding:0 6px}
-.crown{color:var(--gold);margin-left:4px}
-.done{color:var(--troll)} .wait{color:var(--ink-soft)}
+.plist .who{font-size:16px;font-weight:700}
+.plist .x{background:none;border:0;color:var(--soft);font-size:16px;cursor:pointer;padding:0 6px}
+.crown{font-size:11px;font-weight:800;background:var(--ink);color:#fff;border-radius:999px;padding:1px 7px;margin-left:6px;vertical-align:2px}
+.done{color:var(--ink);font-weight:700;font-size:14px} .wait{color:var(--soft);font-size:14px}
 
-.bigcode{font-family:'Song Myung',serif;font-size:54px;letter-spacing:.35em;text-align:center;color:var(--wine-dark);padding-left:.35em}
+.bigcode{font-size:56px;font-weight:800;letter-spacing:.3em;text-align:center;padding-left:.3em;line-height:1.2}
 
-.role{text-align:center;padding:24px 16px}
-.role .icon{font-size:46px;line-height:1}
-.role .rname{font-family:'Song Myung',serif;font-size:38px;margin:6px 0 4px}
-.role.liar{border-color:var(--liar)} .role.liar .rname{color:var(--liar)}
-.role.troll{border-color:var(--troll)} .role.troll .rname{color:var(--troll)}
-.role.audience .rname{color:var(--aud)}
+.role{text-align:center;padding:28px 18px}
+.role .icon{font-size:40px;line-height:1;filter:grayscale(1)}
+.role .rname{font-size:34px;font-weight:800;margin:8px 0 6px;letter-spacing:-.02em}
+.role.liar{background:var(--ink);color:#fff;border-color:var(--ink)} .role.liar .muted{color:#b5b5b5}
+.role.troll{background:#3a3a3a;color:#fff;border-color:#3a3a3a} .role.troll .muted{color:#bdbdbd}
 
-.topic{font-family:'Song Myung',serif;font-size:26px;text-align:center;color:var(--ink);line-height:1.35}
-.topic.hidden{color:var(--liar);letter-spacing:.4em}
-.range{text-align:center;margin-top:10px;font-size:17px}
-.range b{font-size:22px;color:var(--wine-dark)}
+.topic{font-size:23px;font-weight:800;text-align:center;line-height:1.4;letter-spacing:-.02em;margin-top:4px}
+.topic.hidden{letter-spacing:.3em;font-size:30px}
+.range{text-align:center;margin-top:12px;font-size:15px;color:var(--mid)}
+.range b{font-size:18px;color:var(--ink)}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.24em;color:var(--soft);text-align:center;text-transform:uppercase}
 
-.mynum{font-family:'Song Myung',serif;font-size:120px;line-height:1;text-align:center;color:var(--wine-dark);margin:10px 0 0;text-shadow:0 2px 0 #fff4dc}
-.myname{text-align:center;font-family:'Song Myung',serif;font-size:28px}
-.peek{font-size:14px;margin-top:14px}
-.peekbox{margin-top:10px;text-align:center;font-size:18px}
+.mynum{font-size:120px;font-weight:800;line-height:1;text-align:center;margin:12px 0 0;letter-spacing:-.04em}
+.myname{text-align:center;font-size:24px;font-weight:800}
+.peek{margin-top:16px}
+.peekbox{margin-top:12px;text-align:center;font-size:17px}
 
-.reveal-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.rcard{border:1px solid var(--gold);background:#fffdf6;padding:12px 8px;text-align:center}
-.rcard .n{font-family:'Song Myung',serif;font-size:40px;line-height:1.1;color:var(--wine-dark)}
-.rcard .nm{font-size:16px}
-.rcard .rl{display:inline-block;margin-top:6px;padding:1px 10px;font-size:14px;color:#fbf2dc;border-radius:2px}
-.rl.liar{background:var(--liar)} .rl.troll{background:var(--troll)} .rl.audience{background:var(--aud)}
-.pick{display:block;width:100%;margin-top:8px;font:inherit;font-size:15px;padding:8px;cursor:pointer;
-  background:transparent;border:1px solid var(--wine);color:var(--wine-dark);border-radius:2px}
-.rcard.accused{outline:3px solid var(--wine);outline-offset:2px}
+.reveal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rcard{border:1px solid var(--line);border-radius:14px;background:#fafafa;padding:14px 8px;text-align:center}
+.rcard .n{font-size:38px;font-weight:800;line-height:1.15;letter-spacing:-.03em}
+.rcard .nm{font-size:15px;font-weight:700}
+.rcard .rl{display:inline-block;margin-top:6px;padding:2px 10px;font-size:12px;font-weight:800;border-radius:999px}
+.rl.liar{background:var(--ink);color:#fff} .rl.troll{background:#5c5c5c;color:#fff} .rl.audience{background:#fff;color:var(--ink);border:1px solid var(--line-2)}
+.pick{display:block;width:100%;margin-top:10px;font:inherit;font-size:13px;font-weight:700;padding:9px;cursor:pointer;
+  background:#fff;border:1px solid var(--line-2);color:var(--ink);border-radius:10px}
+.rcard.accused{border:2px solid var(--ink);background:#fff}
 
-.winner{text-align:center;padding:26px 16px}
-.winner .crown-big{font-size:40px;color:var(--gold)}
-.winner .wt{font-family:'Song Myung',serif;font-size:32px;line-height:1.3;color:var(--wine-dark);margin:4px 0}
-.score{display:flex;justify-content:space-between;padding:7px 4px;border-bottom:1px dotted var(--line);font-size:17px}
-.score b{font-family:'Song Myung',serif;font-size:20px;color:var(--wine-dark)}
+.winner{text-align:center;padding:30px 18px;background:var(--ink);color:#fff;border-color:var(--ink)}
+.winner .muted{color:#bdbdbd}
+.winner .wt{font-size:30px;font-weight:800;line-height:1.3;margin:6px 0;letter-spacing:-.02em}
+.winner .eyebrow{color:#9a9a9a}
+.score{display:flex;justify-content:space-between;padding:10px 2px;border-bottom:1px solid var(--line);font-size:16px}
+.score:last-child{border-bottom:0}
+.score b{font-size:17px}
 
-details.topics summary{cursor:pointer;font-family:'Song Myung',serif;font-size:18px;color:var(--wine-dark);list-style:none;text-align:center}
+details.topics summary{cursor:pointer;font-size:16px;font-weight:800;list-style:none;text-align:center}
 details.topics summary::-webkit-details-marker{display:none}
-.tlist{list-style:none;padding:0;margin:10px 0 0;font-size:15px}
-.tlist li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px dotted var(--line)}
+.tlist{list-style:none;padding:0;margin:12px 0 0;font-size:14px}
+.tlist li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
 
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);max-width:90%;
-  background:var(--wine-dark);color:#fbf2dc;border:1px solid var(--gold);padding:10px 18px;font-size:15px;
-  box-shadow:0 6px 16px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .25s;z-index:10;text-align:center}
+.rules{margin:0;padding:0;list-style:none;font-size:14.5px;color:var(--ink-2)}
+.rules li{display:flex;gap:10px;padding:7px 0}
+.rules .num{flex:0 0 22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.sec{font-size:12px;font-weight:800;letter-spacing:.2em;color:var(--soft);margin:18px 0 6px}
+.sec:first-of-type{margin-top:4px}
+.roles-tbl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14.5px;color:var(--ink-2)}
+.roles-tbl b{color:var(--ink)}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);max-width:90%;background:var(--ink);color:#fff;
+  padding:11px 18px;border-radius:999px;font-size:14px;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.2);
+  opacity:0;pointer-events:none;transition:opacity .25s;z-index:10;text-align:center}
 .toast.show{opacity:1}
-.hint{font-size:14px;color:var(--ink-soft);text-align:center;margin-top:10px}
+.hint{font-size:14px;color:var(--soft);text-align:center;margin-top:12px}
 .foot{text-align:center;margin-top:24px}
-code{background:#efe3c6;padding:1px 5px}
+.btn.end{color:#b00020;border-color:#e8c4c9}
+code{background:var(--chip);padding:1px 6px;border-radius:4px}
 </style>
 </head>
 <body>
-<div class="curtain-top"></div><div class="curtain"></div>
 <main class="wrap" id="app"></main>
 <div class="toast" id="toast"></div>
 
@@ -162,51 +151,54 @@ const firebaseConfig = {
    ② 기본 주제 카드 (주제, 단위, 최소, 최대)
    =========================================================== */
 const BUILTIN_TOPICS = [
-  ["하루 평균 수면 시간","시간",0,24],
-  ["아침에 일어나서 집을 나서기까지 걸리는 시간","분",0,120],
-  ["양치하는 데 걸리는 시간","분",0,10],
-  ["샤워하는 데 걸리는 시간","분",0,60],
-  ["머리 감는 데 걸리는 시간","분",0,30],
-  ["하루에 마시는 물의 양","컵",0,20],
-  ["일주일에 라면 먹는 횟수","번",0,14],
-  ["일주일에 간식 먹는 횟수","번",0,50],
-  ["한 번에 먹을 수 있는 만두 개수","개",0,50],
-  ["한 번에 먹을 수 있는 귤 개수","개",0,30],
-  ["한 번에 먹을 수 있는 아이스크림 개수","개",0,10],
-  ["한 끼에 먹는 밥 공기 수","공기",0,5],
-  ["매운 음식 자신감 점수","점",0,10],
-  ["가지고 있는 신발 켤레 수","켤레",0,30],
-  ["가지고 있는 인형 개수","개",0,50],
-  ["지금까지 받은 상장 개수","장",0,50],
-  ["지금까지 이사한 횟수","번",0,20],
-  ["지금까지 가 본 나라 수","개국",0,30],
-  ["지금까지 놀이공원에 가 본 횟수","번",0,50],
-  ["1년에 영화관에 가는 횟수","번",0,50],
-  ["하루에 TV·휴대폰을 보는 시간","시간",0,12],
-  ["하루에 게임하는 시간","분",0,300],
-  ["일주일에 책 읽는 시간","시간",0,30],
-  ["일주일에 운동하는 날","일",0,7],
-  ["줄넘기를 쉬지 않고 할 수 있는 개수","개",0,300],
-  ["숨을 참을 수 있는 시간","초",0,120],
-  ["계단으로 쉬지 않고 올라갈 수 있는 층수","층",0,50],
-  ["지금까지 가장 오래 걸어 본 거리","km",0,50],
-  ["외우고 있는 전화번호 개수","개",0,20],
-  ["친한 친구 수","명",0,30],
-  ["하루에 웃는 횟수","번",0,100],
-  ["하루에 거울을 보는 횟수","번",0,50],
-  ["하루에 손을 씻는 횟수","번",0,30],
-  ["하루에 \"배고파\"라고 말하는 횟수","번",0,30],
-  ["이번 달에 들은 칭찬 횟수","번",0,100],
-  ["알람이 울린 뒤 실제로 일어나기까지 걸리는 시간","분",0,60],
-  ["화가 났을 때 마음이 풀리기까지 걸리는 시간","분",0,180],
-  ["기억나는 가장 어렸을 때의 나이","살",0,10],
-  ["스스로 매기는 노래 실력 점수","점",0,100],
-  ["스스로 매기는 요리 실력 점수","점",0,100],
-  ["생일 선물로 받고 싶은 물건의 가격","만 원",0,100],
-  ["1년에 수영장이나 바다에 가는 횟수","번",0,50]
+  ["하루에 방귀 뀌는 횟수","번",0,50],
+  ["일주일 동안 코딱지 판 횟수","번",0,50],
+  ["화장실에서 한 번에 머무는 시간","분",0,60],
+  ["하루에 하품하는 횟수","번",0,100],
+  ["샤워하면서 노래 부르는 시간","분",0,30],
+  ["일주일 동안 자다가 침 흘린 날","일",0,7],
+  ["한 달 동안 양말을 뒤집어 신은 횟수","번",0,30],
+  ["\"5분만 더…\" 하고 더 잔 시간","분",0,120],
+  ["하루에 냉장고 문 여는 횟수","번",0,50],
+  ["하루에 \"배고파\"라고 말하는 횟수","번",0,50],
+  ["하루에 \"왜?\"라고 묻는 횟수","번",0,100],
+  ["하루에 잔소리 듣는 횟수","번",0,50],
+  ["하루에 \"공부해\" 소리 듣는 횟수","번",0,30],
+  ["일주일 동안 형제·자매(가족)와 투닥거린 횟수","번",0,50],
+  ["오늘 몰래 먹은 간식 개수","개",0,20],
+  ["밥 먹을 때 흘리는 밥알 개수","개",0,100],
+  ["한 입에 넣을 수 있는 방울토마토 개수","개",0,30],
+  ["한 번에 먹을 수 있는 치킨 조각 수","조각",0,30],
+  ["한 번에 먹을 수 있는 라면 개수","개",0,10],
+  ["견딜 수 있는 떡볶이 매운맛 단계","단계",0,10],
+  ["무인도에 가져갈 과자 봉지 수","봉지",0,100],
+  ["눈 안 깜빡이고 버틸 수 있는 시간","초",0,120],
+  ["한 발로 서서 버틸 수 있는 시간","초",0,300],
+  ["숨 참고 버틸 수 있는 시간","초",0,120],
+  ["줄넘기 2단 뛰기 연속 개수","개",0,100],
+  ["하루에 거울 보는 횟수","번",0,100],
+  ["일주일 동안 거울 보고 혼자 웃은 횟수","번",0,50],
+  ["방(책상)에 굴러다니는 연필·펜 개수","개",0,100],
+  ["가지고 있는 양말 켤레 수","켤레",0,50],
+  ["내 방이 지저분한 정도","점",0,100],
+  ["오늘 내 기분 점수","점",0,100],
+  ["학교(회사)에 가기 싫은 정도","점",0,100],
+  ["우리 집에서 내 서열 (1등이 대장)","등",1,10],
+  ["내가 사실 외계인일 확률","%",0,100],
+  ["내가 사실 천재일 확률","%",0,100],
+  ["공룡이랑 싸워서 이길 확률","%",0,100],
+  ["로봇청소기보다 청소를 잘할 확률","%",0,100],
+  ["좀비 세상에서 살아남을 수 있는 날","일",0,365],
+  ["키우고 싶은 강아지 수","마리",0,100],
+  ["한 달 용돈으로 받고 싶은 금액","만 원",0,100],
+  ["복권 1등이 되면 가족에게 나눠 줄 비율","%",0,100],
+  ["1년 동안 크고 싶은 키","cm",0,50],
+  ["가장 오래 게임해 본 시간 (하루 기록)","시간",0,24],
+  ["손톱 깎는 주기","일",0,60],
+  ["가장 오래 울어 본 시간","분",0,120]
 ];
 
-const MIN_PLAYERS = 4, MAX_PLAYERS = 6;
+const MIN_PLAYERS = 3, MAX_PLAYERS = 6;
 const ROLES = {
   liar:     {name:"라이어", icon:"🎭", goal:"주제를 모른 채 숫자를 적어요. 끝까지 들키지 않으면 승리!"},
   troll:    {name:"트롤",   icon:"🃏", goal:"주제를 알고 있어요. 모두가 나를 라이어로 지목하게 만들면 승리!"},
@@ -284,7 +276,7 @@ function enterRoom(code){
   roomRef = db.ref('rooms/'+code);
   roomRef.on('value', snap => {
     room = snap.val();
-    if(!room){ leaveLocal(); toast('방이 닫혔어요'); return; }
+    if(!room){ leaveLocal(); toast('게임이 종료되었어요'); return; }
     if(!room.players || !room.players[myId]){ leaveLocal(); toast('방에서 나왔어요'); return; }
     hostAutoAdvance();
     render();
@@ -361,6 +353,12 @@ async function chooseAccused(pid){
   await roomRef.update(upd);
 }
 
+async function endGame(){
+  if(!isHost()) return;
+  if(!confirm('정말 게임을 종료할까요?\n모든 참가자가 처음 화면으로 돌아가고, 지금까지의 전적도 모두 사라져요.')) return;
+  await db.ref('rooms/'+roomCode).remove();
+}
+
 async function toLobby(){ await roomRef.update({ phase: 'lobby', game: null }); }
 
 async function submitNumber(){
@@ -381,16 +379,17 @@ function render(){
 
   if(!configured) $app.innerHTML = viewSetup();
   else if(!room) $app.innerHTML = viewHome();
-  else $app.innerHTML = viewTop() + ({lobby:viewLobby, input:viewInput, discuss:viewDiscuss, reveal:viewReveal, result:viewResult}[room.phase] || viewLobby)();
+  else $app.innerHTML = viewTop() + ({lobby:viewLobby, input:viewInput, discuss:viewDiscuss, reveal:viewReveal, result:viewResult}[room.phase] || viewLobby)()
+    + (isHost() && room.phase !== 'lobby' ? `<div class="foot"><button class="btn ghost small end" data-act="end">게임 종료</button></div>` : '');
 
   Object.entries(keep).forEach(([id, v]) => { const el = document.getElementById(id); if(el && !el.dataset.fresh) el.value = v; });
   if(focusId){ const el = document.getElementById(focusId); if(el) el.focus(); }
 }
 
-const brand = () => `<div class="brand"><h1>거짓말 극장</h1><div class="sub">THEATRE OF LIES</div><div class="orn">✦ ❧ ✦</div></div>`;
+const brand = () => `<div class="brand"><h1>라이어 게임<span class="for">for Family</span></h1><div class="sub">WHO IS THE LIAR?</div><div class="bar"></div></div>`;
 
 function viewSetup(){
-  return brand() + `<section class="card"><h2>무대 준비가 필요합니다</h2>
+  return brand() + `<section class="card"><h2>설정이 필요해요</h2>
     <p>이 파일의 <code>firebaseConfig</code> 부분에 Firebase 설정값을 넣어야 여러 사람이 함께 접속할 수 있어요.</p>
     <p class="muted">설정 방법은 함께 받은 안내를 참고해 주세요.</p></section>`;
 }
@@ -399,28 +398,47 @@ function viewHome(){
   const urlCode = new URLSearchParams(location.search).get('room') || '';
   return brand() + `
   <section class="card">
-    <h2>입장권</h2>
     <label for="nameIn">닉네임</label>
     <input id="nameIn" type="text" maxlength="10" placeholder="예) 셜록" value="${esc(myName)}">
     <hr class="rule">
-    <h3 class="center">새 무대 열기</h3>
+    <h3 class="center">새 게임 만들기</h3>
     <p class="muted center">내 휴대폰이 호스트가 되어 방을 만들어요.</p>
     <button class="btn" data-act="create">방 만들기</button>
     <hr class="rule">
-    <h3 class="center">무대에 입장하기</h3>
+    <h3 class="center">입장 코드로 참가</h3>
+    <p class="muted center">게스트로 게임에 참가해요.</p>
     <label for="codeIn">입장 코드 4자리</label>
     <input id="codeIn" class="code" type="tel" inputmode="numeric" maxlength="4" placeholder="0000" value="${esc(urlCode)}">
     <button class="btn ghost" data-act="join">입장하기</button>
   </section>
-  <section class="card"><h3 class="center">극장의 규칙</h3>
-    <p class="muted">${ROLES.liar.icon} <b>라이어</b> 1명은 주제를 모른 채 숫자를 적고, ${ROLES.troll.icon} <b>트롤</b> 1명은 일부러 의심받으려 하며, ${ROLES.audience.icon} <b>관객</b>은 라이어를 찾아냅니다.
-    숫자를 보여 주며 이야기를 나눈 뒤, 셋·둘·하나에 동시에 라이어를 지목하세요. 동점이면 다시 지목합니다.</p>
+  <section class="card"><h2>게임의 규칙</h2>
+    <div class="sec">역할</div>
+    <div class="roles-tbl">
+      <b>라이어 1명</b><span>주제를 모르고 숫자 범위만 봐요. 들키지 않는 게 목표!</span>
+      <b>트롤 1명</b><span>주제를 알아요. 일부러 의심받아 라이어로 지목되는 게 목표!</span>
+      <b>관객</b><span>주제를 알아요. 숨은 라이어를 찾아내는 게 목표!</span>
+    </div>
+    <div class="sec">진행 순서</div>
+    <ol class="rules">
+      <li><span class="num">1</span><span>호스트가 방을 만들고, 모두 입장 코드로 참가해요. (3~6명)</span></li>
+      <li><span class="num">2</span><span>각자 휴대폰에 역할과 주제, 숫자 범위가 나와요.</span></li>
+      <li><span class="num">3</span><span>범위 안에서 나에게 맞는 숫자를 적어요. 라이어는 눈치껏!</span></li>
+      <li><span class="num">4</span><span>모두 적으면 주제가 공개돼요. 화면을 보여 주며 왜 그 숫자인지 설명해요.</span></li>
+      <li><span class="num">5</span><span>셋·둘·하나! 라이어 같은 사람을 동시에 손가락으로 지목해요. 동점이면 다시!</span></li>
+      <li><span class="num">6</span><span>호스트가 결과를 공개하고, 가장 많이 지목된 사람을 눌러요.</span></li>
+    </ol>
+    <div class="sec">승리 조건</div>
+    <ul class="rules">
+      <li><span class="num">✓</span><span>라이어가 지목되면 <b>관객 승리</b></span></li>
+      <li><span class="num">✓</span><span>트롤이 지목되면 <b>라이어·트롤 승리</b></span></li>
+      <li><span class="num">✓</span><span>관객이 지목되면 <b>라이어 승리</b></span></li>
+    </ul>
   </section>`;
 }
 
 function viewTop(){
-  return `<div class="topbar"><span class="name">거짓말 극장</span>
-    <span>${room.round ? `제${room.round}막 · ` : ''}<span class="badge">${esc(roomCode)}</span></span></div>`;
+  return `<div class="topbar"><span class="name">라이어 게임<small>FOR FAMILY</small></span>
+    <span>${room.round ? `ROUND ${room.round} · ` : ''}<span class="badge">${esc(roomCode)}</span></span></div>`;
 }
 
 function playerList(opts = {}){
@@ -430,7 +448,7 @@ function playerList(opts = {}){
     let right = '';
     if(opts.status){ const done = opts.status(id); right = done === null ? '<span class="wait">관람</span>' : done ? '<span class="done">✓ 제출</span>' : '<span class="wait">작성 중…</span>'; }
     else if(isHost() && id !== myId) right = `<button class="x" data-act="kick" data-id="${id}" aria-label="내보내기">✕</button>`;
-    return `<li><span class="who">${esc(ps[id].name)}${id === room.host ? '<span class="crown">♛</span>' : ''}${id === myId ? ' <span class="muted">(나)</span>' : ''}</span>${right}</li>`;
+    return `<li><span class="who">${esc(ps[id].name)}${id === room.host ? '<span class="crown">HOST</span>' : ''}${id === myId ? ' <span class="muted">(나)</span>' : ''}</span>${right}</li>`;
   }).join('') + `</ul>`;
 }
 
@@ -443,20 +461,20 @@ function viewLobby(){
     <p class="muted center">같은 주소로 들어와 이 코드를 입력하면 입장할 수 있어요.</p>
     <button class="btn ghost small" style="display:block;margin:8px auto 0" data-act="copy">초대 링크 복사</button>
   </section>
-  <section class="card"><h2>출연진 (${n}/${MAX_PLAYERS})</h2>${playerList()}</section>`;
+  <section class="card"><h2>참가자 (${n}/${MAX_PLAYERS})</h2>${playerList()}</section>`;
   if(isHost()){
-    html += `<button class="btn" data-act="start" ${canStart ? '' : 'disabled'}>공연 시작</button>
+    html += `<button class="btn" data-act="start" ${canStart ? '' : 'disabled'}>게임 시작</button>
       ${canStart ? '' : `<p class="hint">${MIN_PLAYERS}~${MAX_PLAYERS}명이 모이면 시작할 수 있어요.</p>`}
       ${viewTopicManager()}`;
   } else {
-    html += `<p class="hint">호스트가 공연을 시작하기를 기다리는 중…</p>`;
+    html += `<p class="hint">호스트가 게임을 시작하기를 기다리는 중…</p>`;
   }
   return html + `<div class="foot"><button class="btn ghost small" data-act="leave">나가기</button></div>`;
 }
 
 function viewTopicManager(){
   const list = getCustom();
-  return `<section class="card"><details class="topics"><summary>✎ 주제 카드 직접 추가하기 (${list.length})</summary>
+  return `<section class="card"><details class="topics"><summary>＋ 주제 카드 직접 추가하기 (${list.length})</summary>
     <p class="muted">기본 주제 ${BUILTIN_TOPICS.length}개에 더해, 여기서 추가한 주제도 무작위로 나와요. 이 휴대폰에 저장됩니다.</p>
     <label for="tText">주제</label><input id="tText" type="text" maxlength="40" placeholder="예) 하루에 하품하는 횟수">
     <label for="tUnit">단위</label><input id="tUnit" type="text" maxlength="6" placeholder="예) 번">
@@ -469,25 +487,25 @@ function viewTopicManager(){
 
 function myRoleCard(){
   const r = room.game.roles[myId]; const R = ROLES[r];
-  return `<section class="card role ${r}"><div class="muted">당신의 배역</div><div class="icon">${R.icon}</div><div class="rname">${R.name}</div><div class="muted">${R.goal}</div></section>`;
+  return `<section class="card role ${r}"><div class="eyebrow muted">나의 역할</div><div class="icon">${R.icon}</div><div class="rname">${R.name}</div><div class="muted">${R.goal}</div></section>`;
 }
 
 function viewInput(){
   const g = room.game;
-  if(!g.roles[myId]) return `<section class="card center"><h2>이번 막은 관람 중</h2><p class="muted">다음 판부터 함께할 수 있어요.</p></section>`;
+  if(!g.roles[myId]) return `<section class="card center"><h2>이번 판은 구경 중</h2><p class="muted">다음 판부터 함께할 수 있어요.</p></section>`;
   const role = g.roles[myId];
   const nums = g.numbers || {};
   const mine = nums[myId];
   const ids = Object.keys(g.roles).filter(id => players()[id]);
   const doneCnt = ids.filter(id => nums[id] !== undefined).length;
-  let html = myRoleCard() + `<section class="card"><div class="muted center">이번 막의 주제</div>
+  let html = myRoleCard() + `<section class="card"><div class="eyebrow">이번 판의 주제</div>
     ${role === 'liar' ? `<div class="topic hidden">？？？</div><p class="muted center">라이어는 주제를 볼 수 없어요. 범위 안에서 그럴듯한 숫자를 적으세요.</p>` : `<div class="topic">${esc(g.topic)}</div>`}
     <div class="range">범위 <b>${g.min}</b> ~ <b>${g.max}</b> ${esc(g.unit)}</div>`;
   if(mine === undefined){
     html += `<label for="numIn">나의 숫자</label><input id="numIn" class="code" style="letter-spacing:.1em" type="number" inputmode="numeric" min="${g.min}" max="${g.max}" placeholder="?">
       <button class="btn" data-act="submit">제출하기</button>`;
   } else {
-    html += `<div class="mynum" style="font-size:72px">${mine}</div><p class="hint">제출 완료! 다른 출연진을 기다리는 중… (${doneCnt}/${ids.length})</p>`;
+    html += `<div class="mynum" style="font-size:72px">${mine}</div><p class="hint">제출 완료! 다른 참가자를 기다리는 중… (${doneCnt}/${ids.length})</p>`;
   }
   html += `</section><section class="card"><h3 class="center">제출 현황</h3>${playerList({status: id => g.roles[id] ? nums[id] !== undefined : null})}</section>`;
   if(isHost()) html += `<div class="foot"><button class="btn ghost small" data-act="force">입력 기다리지 않고 주제 공개</button></div>`;
@@ -499,7 +517,7 @@ function viewDiscuss(){
   if(!g.roles[myId]) return `<section class="card center"><h2>토론 중</h2><div class="topic">${esc(g.topic)}</div></section>`;
   const mine = (g.numbers || {})[myId];
   const r = g.roles[myId];
-  let html = `<section class="card"><div class="muted center">이번 막의 주제</div><div class="topic">${esc(g.topic)}</div>
+  let html = `<section class="card"><div class="eyebrow">이번 판의 주제</div><div class="topic">${esc(g.topic)}</div>
     <div class="range">${g.min} ~ ${g.max} ${esc(g.unit)}</div></section>
   <section class="card"><div class="myname">${esc(myName)}</div>
     <div class="mynum">${mine === undefined ? '–' : mine}</div>
@@ -536,14 +554,14 @@ function viewResult(){
   const g = room.game; const W = WIN[g.winner] || WIN.audience;
   const ps = players();
   const board = Object.keys(ps).sort((a,b) => (ps[b].score||0) - (ps[a].score||0));
-  let html = `<section class="card winner"><div class="crown-big">♛</div><div class="wt">${W.title}</div>
+  let html = `<section class="card winner"><div class="eyebrow">RESULT</div><div class="wt">${W.title}</div>
     <div class="muted">${W.desc}</div>
     <p>지목된 사람: <b>${esc(nameOf(g.accused))}</b> (${ROLES[g.roles[g.accused]].name})</p></section>
-  <section class="card"><h3 class="center">이번 막의 배역</h3>${resultGrid(false)}</section>
+  <section class="card"><h3 class="center">이번 판의 역할</h3>${resultGrid(false)}</section>
   <section class="card"><h3 class="center">누적 승리</h3>${board.map(id => `<div class="score"><span>${esc(ps[id].name)}${id===myId?' <span class="muted">(나)</span>':''}</span><b>${ps[id].score||0}승</b></div>`).join('')}</section>`;
-  if(isHost()) html += `<button class="btn" data-act="start">새 게임</button><button class="btn ghost" data-act="lobby">대기실로 (출연진·주제 정리)</button>`;
-  else html += `<p class="hint">호스트가 다음 막을 준비하는 중…</p>`;
-  return html + `<div class="foot"><button class="btn ghost small" data-act="leave">나가기</button></div>`;
+  if(isHost()) html += `<button class="btn" data-act="start">새 게임</button><button class="btn ghost" data-act="lobby">대기실로 (참가자·주제 정리)</button>`;
+  else html += `<p class="hint">호스트가 다음 판을 준비하는 중…</p>`;
+  return html + (isHost() ? '' : `<div class="foot"><button class="btn ghost small" data-act="leave">나가기</button></div>`);
 }
 
 /* ---------- 이벤트 ---------- */
@@ -559,6 +577,7 @@ async function act(a, id){
       case 'accuse': return await chooseAccused(id);
       case 'lobby': return await toLobby();
       case 'leave': return await leaveRoom();
+      case 'end': return await endGame();
       case 'peek': peek = !peek; return render();
       case 'kick':
         if(confirm(`${nameOf(id)} 님을 내보낼까요?`)) await db.ref(`rooms/${roomCode}/players/${id}`).remove();
