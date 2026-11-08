@@ -627,7 +627,7 @@ function viewInput(){
   const doneCnt = ids.filter(id => nums[id] !== undefined).length;
   let html = myRoleCard() + `<section class="card"><div class="eyebrow">이번 판의 주제</div>
     ${role === 'liar' ? `<div class="topic hidden">？？？</div><p class="muted center">라이어는 주제를 볼 수 없어요. 범위 안에서 그럴듯한 숫자를 적으세요.</p>` : `<div class="topic">${esc(g.topic)}</div>`}
-    <div class="range">범위 <b>${g.min}</b> ~ <b>${g.max}</b> ${esc(g.unit)}</div>`;
+    <div class="range">범위 <b>${g.min}</b> ~ <b>${g.max}</b>${role === 'liar' ? '' : ' ' + esc(g.unit)}</div>`;
   if(mine === undefined){
     html += `<label for="numIn">나의 숫자</label><input id="numIn" class="code" style="letter-spacing:.1em" type="number" inputmode="numeric" min="${g.min}" max="${g.max}" placeholder="?">
       <button class="btn" data-act="submit">제출하기</button>`;
